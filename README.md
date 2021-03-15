@@ -1,4 +1,4 @@
-osm [![Build Status](https://travis-ci.org/paulmach/osm.svg?branch=master)](https://travis-ci.org/paulmach/osm) [![Go Report Card](https://goreportcard.com/badge/github.com/paulmach/osm)](https://goreportcard.com/report/github.com/paulmach/osm) [![Godoc Reference](https://godoc.org/github.com/paulmach/osm?status.svg)](https://godoc.org/github.com/paulmach/osm)
+osm [![CI](https://github.com/paulmach/osm/workflows/CI/badge.svg)](https://github.com/paulmach/osm/actions?query=workflow%3ACI+event%3Apush) [![Go Report Card](https://goreportcard.com/badge/github.com/paulmach/osm)](https://goreportcard.com/report/github.com/paulmach/osm) [![Go Reference](https://pkg.go.dev/badge/github.com/paulmach/osm.svg)](https://pkg.go.dev/github.com/paulmach/osm)
 =====
 
 This package is a general purpose library for reading, writing and working
@@ -21,7 +21,7 @@ Made available by the package are the following types:
 And the following “container” types:
 
 * OSM - container returned via API
-* Change - used by the replication API.
+* Change - used by the replication API
 * Diff - corresponds to [Overpass Augmented diffs](https://wiki.openstreetmap.org/wiki/Overpass_API/Augmented_Diffs)
 
 ## List of sub-package utilities
@@ -30,7 +30,7 @@ And the following “container” types:
 * [`osmapi`](osmapi) - supports all the v0.6 read/data endpoints
 * [`osmgeojson`](osmgeojson) - OSM to GeoJSON conversion compatible with [osmtogeojson](https://github.com/tyrasd/osmtogeojson)
 * [`osmpbf`](osmpbf) - stream processing of `*.osm.pbf` files
-* [`osmxml`](osmxml) - stream processing of `*.osm` xml files.
+* [`osmxml`](osmxml) - stream processing of `*.osm` xml files
 * [`replication`](replication) - fetch replication state and change files
 
 ## Concepts
@@ -53,42 +53,46 @@ The idea is to make it easy to work with a Way and its member nodes, for example
 ## Scanning large data files
 
 For small data it is possible to use the `encoding/xml` package in the
-Go standard libray to marshal/unmarshal the data. This is typically done using the
+Go standard library to marshal/unmarshal the data. This is typically done using the
 `osm.OSM` or `osm.Change` "container" structs.
 
 For large data the package defines the `Scanner` interface implemented in both the [osmxml](osmxml)
 and [osmpbf](osmpbf) sub-packages.
 
-	type osm.Scanner interface {
-		Scan() bool
-		Object() osm.Object
-		Err() error
-		Close() error
-	}
+```go
+type osm.Scanner interface {
+	Scan() bool
+	Object() osm.Object
+	Err() error
+	Close() error
+}
+```
 
 This interface is designed to mimic the [bufio.Scanner](https://golang.org/pkg/bufio/#Scanner)
 interface found in the Go standard library.
 
 Example usage:
 
-	f, err := os.Open("./delaware-latest.osm.pbf")
-	if err != nil {
-		panic(err)
-	}
-	defer f.Close()
+```go
+f, err := os.Open("./delaware-latest.osm.pbf")
+if err != nil {
+	panic(err)
+}
+defer f.Close()
 
-	scanner := osmpbf.New(context.Background(), f, 3)
-	defer scanner.Close()
+scanner := osmpbf.New(context.Background(), f, 3)
+defer scanner.Close()
 
-	for scanner.Scan() {
-		o := scanner.Object()
-		// do something
-	}
+for scanner.Scan() {
+	o := scanner.Object()
+	// do something
+}
 
-	scanErr := scanner.Err()
-	if scanErr != nil {
-		panic(scanErr)
-	}
+scanErr := scanner.Err()
+if scanErr != nil {
+	panic(scanErr)
+}
+```
 
 **Note:** Scanners are **not** safe for parallel use. One should feed the
 objects into a channel and have workers read from that.

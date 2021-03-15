@@ -1,11 +1,13 @@
-osm/osmapi [![Godoc Reference](https://godoc.org/github.com/paulmach/osm/osmapi?status.png)](https://godoc.org/github.com/paulmach/osm/osmapi)
+osm/osmapi [![Godoc Reference](https://godoc.org/github.com/paulmach/osm/osmapi?status.svg)](https://godoc.org/github.com/paulmach/osm/osmapi)
 ==========
 
 Package osmapi provides an interface to the [OSM v0.6 API](https://wiki.openstreetmap.org/wiki/API_v0.6).
 
 Usage:
 
-	node, err := osmapi.Node(ctx, 1010)
+```go
+node, err := osmapi.Node(ctx, 1010)
+```
 
 This call issues a request to [api.openstreetmap.org/api/0.6/node/1010](https://api.openstreetmap.org/api/0.6/node/1010)
 and returns a parsed `osm.Node` object with all the methods attached.
@@ -58,5 +60,7 @@ for more details.
 This package can make sure of [`x/time/rate.Limiter`](https://godoc.org/golang.org/x/time/rate#Limiter)
  to throttle requests to the official api. Example usage:
 
-	// 10 qps
-	osmapi.DefaultDatasource.Limiter = rate.NewLimiter(10, 1)
+```go
+// 10 qps
+osmapi.DefaultDatasource.Limiter = rate.NewLimiter(10, 1)
+```

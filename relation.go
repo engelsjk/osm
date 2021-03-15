@@ -19,7 +19,7 @@ func (id RelationID) ObjectID(v int) ObjectID {
 
 // FeatureID is a helper returning the feature id for this relation id.
 func (id RelationID) FeatureID() FeatureID {
-	return FeatureID((relationMask | id<<versionBits))
+	return FeatureID(relationMask | id<<versionBits)
 }
 
 // ElementID is a helper to convert the id to an element id.
@@ -75,7 +75,11 @@ type Member struct {
 
 	// Orientation is the direction of the way around a ring of a multipolygon.
 	// Only valid for multipolygon or boundary relations.
-	Orientation orb.Orientation `xml:"orienation,attr,omitempty" json:"orienation,omitempty"`
+	Orientation orb.Orientation `xml:"orientation,attr,omitempty" json:"orientation,omitempty"`
+
+	// Nodes are sometimes included in members of type way to include the lat/lon
+	// path of the way. Overpass returns xml like this.
+	Nodes WayNodes `xml:"nd" json:"nodes,omitempty"`
 }
 
 // ObjectID returns the object id of the relation.
@@ -236,6 +240,8 @@ func (rs Relations) ElementIDs() ElementIDs {
 }
 
 // Marshal encodes the relations using protocol buffers.
+//
+// Deprecated: encoding could be improved, should be versioned separately.
 func (rs Relations) Marshal() ([]byte, error) {
 	o := OSM{
 		Relations: rs,
@@ -245,6 +251,8 @@ func (rs Relations) Marshal() ([]byte, error) {
 }
 
 // UnmarshalRelations will unmarshal the data into a list of relations.
+//
+// Deprecated: encoding could be improved, should be versioned separately.
 func UnmarshalRelations(data []byte) (Relations, error) {
 	o, err := UnmarshalOSM(data)
 	if err != nil {

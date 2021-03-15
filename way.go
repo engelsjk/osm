@@ -59,7 +59,7 @@ type WayNodes []WayNode
 
 // WayNode is a short node used as part of ways and relations in the osm xml.
 type WayNode struct {
-	ID NodeID `xml:"ref,attr"`
+	ID NodeID `xml:"ref,attr,omitempty"`
 
 	// These attributes are populated for concrete versions of ways.
 	Version     int         `xml:"version,attr,omitempty"`
@@ -333,6 +333,8 @@ func (ws Ways) ElementIDs() ElementIDs {
 }
 
 // Marshal encodes the ways using protocol buffers.
+//
+// Deprecated: encoding could be improved, should be versioned separately.
 func (ws Ways) Marshal() ([]byte, error) {
 	o := OSM{
 		Ways: ws,
@@ -342,6 +344,8 @@ func (ws Ways) Marshal() ([]byte, error) {
 }
 
 // UnmarshalWays will unmarshal the data into a list of ways.
+//
+// Deprecated: encoding could be improved, should be versioned separately.
 func UnmarshalWays(data []byte) (Ways, error) {
 	o, err := UnmarshalOSM(data)
 	if err != nil {
