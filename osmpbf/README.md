@@ -1,4 +1,4 @@
-osm/osmpbf [![Go Reference](https://pkg.go.dev/badge/github.com/paulmach/osm.svg)](https://pkg.go.dev/github.com/paulmach/osm/osmpbf)
+osm/osmpbf [![Go Reference](https://pkg.go.dev/badge/github.com/engelsjk/osm.svg)](https://pkg.go.dev/github.com/engelsjk/osm/osmpbf)
 ==========
 
 Package osmpbf provides a scanner for decoding large [OSM PBF](https://wiki.openstreetmap.org/wiki/PBF_Format) files.

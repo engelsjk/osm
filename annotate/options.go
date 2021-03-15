@@ -3,8 +3,8 @@ package annotate
 import (
 	"time"
 
-	"github.com/paulmach/osm"
-	"github.com/paulmach/osm/annotate/internal/core"
+	"github.com/engelsjk/osm"
+	"github.com/engelsjk/osm/annotate/internal/core"
 )
 
 // Option is a parameter that can be used for annotating.

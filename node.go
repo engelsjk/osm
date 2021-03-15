@@ -4,8 +4,8 @@ import (
 	"sort"
 	"time"
 
+	"github.com/engelsjk/osm/internal/osmpb"
 	"github.com/paulmach/orb"
-	"github.com/paulmach/osm/internal/osmpb"
 
 	"github.com/gogo/protobuf/proto"
 )

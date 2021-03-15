@@ -10,9 +10,9 @@ import (
 	"sync"
 	"time"
 
+	"github.com/engelsjk/osm"
+	"github.com/engelsjk/osm/osmpbf/internal/osmpbf"
 	"github.com/gogo/protobuf/proto"
-	"github.com/paulmach/osm"
-	"github.com/paulmach/osm/osmpbf/internal/osmpbf"
 )
 
 const (

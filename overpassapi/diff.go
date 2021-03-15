@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/paulmach/osm"
-	"github.com/paulmach/osm/osmapi"
+	"github.com/engelsjk/osm"
+	"github.com/engelsjk/osm/osmapi"
 )
 
 type AugmentedDiffSeqNum uint64

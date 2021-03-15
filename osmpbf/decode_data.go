@@ -4,8 +4,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/paulmach/osm"
-	"github.com/paulmach/osm/osmpbf/internal/osmpbf"
+	"github.com/engelsjk/osm"
+	"github.com/engelsjk/osm/osmpbf/internal/osmpbf"
 	"github.com/paulmach/protoscan"
 )
 
@@ -382,7 +382,7 @@ func (dec *dataDecoder) extractDenseNodes() error {
 			return err
 		}
 		lat += v8
-		n.Lat = 1e-9 * float64(latOffset + (granularity * lat))
+		n.Lat = 1e-9 * float64(latOffset+(granularity*lat))
 
 		// lon
 		v9, err := dec.lons.Sint64()
@@ -390,7 +390,7 @@ func (dec *dataDecoder) extractDenseNodes() error {
 			return err
 		}
 		lon += v9
-		n.Lon = 1e-9 * float64(lonOffset + (granularity * lon))
+		n.Lon = 1e-9 * float64(lonOffset+(granularity*lon))
 
 		// tags, could be missing if all nodes are tagless
 		if dec.keyvals != nil {

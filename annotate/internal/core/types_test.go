@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/paulmach/osm"
-	"github.com/paulmach/osm/annotate/shared"
+	"github.com/engelsjk/osm"
+	"github.com/engelsjk/osm/annotate/shared"
 )
 
 type findVisibleTestCase struct {
